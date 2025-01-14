@@ -1,9 +1,11 @@
 import * as THREE from "three";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from 'next/router';
+import ReactDOM from 'react-dom';
 import { PARTICLE_CONFIG, CAMERA_CONFIG } from '../constants/particle.constants';
 import { vertexShader, fragmentShader } from '../shaders/particle.shaders';
 import type { ParticlePositions, MousePosition, Rotation } from '../types/three.types';
+import WelcomeText from './WelcomeText';
 
 const WelcomeScreen: React.FC = () => {
   const router = useRouter();
@@ -31,6 +33,7 @@ const WelcomeScreen: React.FC = () => {
     // Camera setup
     const camera = new THREE.PerspectiveCamera(CAMERA_CONFIG.FOV, window.innerWidth / window.innerHeight, CAMERA_CONFIG.NEAR, CAMERA_CONFIG.FAR);
     camera.position.z = CAMERA_CONFIG.POSITION_Z;
+    camera.position.y = -2; // Move camera down to shift sphere down
     cameraRef.current = camera;
 
     // Renderer setup
@@ -116,6 +119,7 @@ const WelcomeScreen: React.FC = () => {
     particlesGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     const particleMesh = new THREE.Points(particlesGeometry, particleMaterial);
+    particleMesh.position.y = -4; // Move the sphere down
     scene.add(particleMesh);
     particleMeshRef.current = particleMesh;
 
@@ -138,7 +142,7 @@ const WelcomeScreen: React.FC = () => {
         const velocities = spherePositionsRef.current.velocity;
 
         const springStrength = isDispersing ? PARTICLE_CONFIG.SPRING_STRENGTH.DISPERSING : PARTICLE_CONFIG.SPRING_STRENGTH.NORMAL;
-        const damping = isDispersing ? PARTICLE_CONFIG.DAMPING.DISPERSING : PARTICLE_CONFIG.DAMPING.NORMAL;
+        const damping = isDispersing ? 0.99 : PARTICLE_CONFIG.DAMPING.NORMAL; // Increased damping for smoother dispersion
         const mouseInfluence = isHovering ? PARTICLE_CONFIG.MOUSE_INFLUENCE.HOVER : PARTICLE_CONFIG.MOUSE_INFLUENCE.NORMAL;
         const mouseSpeed = Math.sqrt(
           Math.pow(mousePositionRef.current.x - mousePositionRef.current.prevX, 2) +
@@ -149,8 +153,8 @@ const WelcomeScreen: React.FC = () => {
 
         // Add color shift based on hover and time
         const material = particleMeshRef.current.material as THREE.ShaderMaterial;
-        const baseColorShift = timeRef.current * 0.05; // Very slow base color shift
-        const hoverColorShift = isHovering ? Math.sin(timeRef.current * 2) * 0.2 : 0;
+        const baseColorShift = timeRef.current * .007;
+        const hoverColorShift = isHovering ? Math.sin(timeRef.current * 0.5) * 0.1 : 0; // Reduced frequency from 2 to 0.5 and amplitude from 0.2 to 0.1
         material.uniforms.colorShift.value = baseColorShift + hoverColorShift;
 
         for (let i = 0; i < positions.length; i += 3) {
@@ -262,6 +266,28 @@ const WelcomeScreen: React.FC = () => {
           positions[i + 2] += velocities[i + 2];
         }
 
+        // Add spiral rotation during dispersion
+        if (isDispersing) {
+          const dispersalTime = timeRef.current;
+          for (let i = 0; i < positions.length; i += 3) {
+            const spiralAngle = dispersalTime * 2 + i * 0.0001;
+            const spiralRadius = Math.min(dispersalTime * 10, 50);
+            
+            targetPositions[i] += Math.cos(spiralAngle) * spiralRadius * 0.1;
+            targetPositions[i + 1] += Math.sin(spiralAngle) * spiralRadius * 0.1;
+            targetPositions[i + 2] += (Math.random() - 0.5) * 2;
+            
+            // Add upward drift
+            targetPositions[i + 1] += isDispersing ? 1 : 0;
+          }
+        }
+
+        // Update particle material during dispersion
+        if (isDispersing) {
+          const particleMaterial = particleMeshRef.current.material as THREE.ShaderMaterial;
+          particleMaterial.uniforms.size.value = PARTICLE_CONFIG.BASE_SIZE * (1 + Math.sin(timeRef.current * 4) * 0.2);
+        }
+
         particleMeshRef.current.geometry.attributes.position.needsUpdate = true;
 
         const rotationSpeed = PARTICLE_CONFIG.ROTATION_SPEED;
@@ -315,9 +341,28 @@ const WelcomeScreen: React.FC = () => {
     const handleClick = () => {
       if (!isDispersing) {
         setIsDispersing(true);
+        
+        // Add explosive dispersal effect
+        if (spherePositionsRef.current && particleMeshRef.current) {
+          const positions = particleMeshRef.current.geometry.attributes.position.array;
+          const velocities = spherePositionsRef.current.velocity;
+          
+          for (let i = 0; i < positions.length; i += 3) {
+            const angle = Math.random() * Math.PI * 2;
+            const radius = Math.random() * PARTICLE_CONFIG.DISPERSE_DISTANCE;
+            const upwardBias = Math.random() * 100; // Upward force
+            const spiralForce = Math.random() * 50; // Spiral force
+            
+            // Calculate direction with spiral
+            velocities[i] = (Math.cos(angle) * radius + Math.sin(angle) * spiralForce) * 0.1;
+            velocities[i + 1] = (Math.sin(angle) * radius + upwardBias + Math.cos(angle) * spiralForce) * 0.1;
+            velocities[i + 2] = (Math.random() - 0.5) * radius * 0.1;
+          }
+        }
+
         setTimeout(() => {
-          router.push('/next-page'); // Replace with your desired route
-        }, 1000);
+          router.push('/next-page');
+        }, 1500); // Increased delay to allow for the enhanced animation
       }
     };
 
@@ -335,12 +380,20 @@ const WelcomeScreen: React.FC = () => {
       cancelAnimationFrame(frame);
 
       if (mountRef.current && rendererRef.current) {
-        mountRef.current.removeChild(rendererRef.current.domElement);
+        const canvas = rendererRef.current.domElement;
+        if (canvas.parentElement === mountRef.current) {
+          mountRef.current.removeChild(canvas);
+        }
       }
     };
   }, [isHovering, isDispersing, router]);
 
-  return <div className="w-full h-screen cursor-pointer" ref={mountRef} />;
+  return (
+    <div className="relative w-full h-screen">
+      <WelcomeText isDispersing={isDispersing} />
+      <div ref={mountRef} className="w-full h-full" />
+    </div>
+  );
 };
 
 export default WelcomeScreen;
