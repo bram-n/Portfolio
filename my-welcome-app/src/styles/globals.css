@@ -45,3 +45,10 @@ body {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300;
   }
 }
+
+/* Add vertical text styling */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
