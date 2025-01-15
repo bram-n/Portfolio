@@ -38,7 +38,7 @@ const Navbar = () => {
       {/* Social Links - Fixed to bottom right */}
       <div className="fixed bottom-8 right-8 flex flex-row items-center space-x-4 z-50">
         <a
-          href="https://github.com/yourusername"
+          href="https://github.com/bram-n"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-400 hover:text-cyan-400 transition-colors relative group"
@@ -55,7 +55,7 @@ const Navbar = () => {
           <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300 group-hover:w-full transition-all duration-300 -translate-x-1/2 opacity-0 group-hover:opacity-70"></div>
         </a>
         <a
-          href="https://linkedin.com/in/yourusername"
+          href="https://www.linkedin.com/in/abraham-nutt/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-gray-400 hover:text-cyan-400 transition-colors relative group"
