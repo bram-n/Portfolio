@@ -4,6 +4,70 @@ import { PARTICLE_CONFIG, CAMERA_CONFIG } from '../constants/particle.constants'
 import { vertexShader, fragmentShader } from '../shaders/particle.shaders';
 import type { ParticlePositions, MousePosition, Rotation } from '../types/three.types';
 import Navbar from '../components/Navbar';
+import { TracingBeam } from '../components/TracingBeam';
+import { ProjectsSection } from '../components/ProjectsSection';
+import { AboutSection } from '../components/AboutSection';
+
+const projectSections = [
+  {
+    title: "AI Projects",
+    pattern: 'v-shape' as const,
+    cards: [
+      {
+        title: "Deep Vector Autoregression",
+        src: "/project1.jpg",
+        description: "My Honors Economics Research project which utilizes a Deep VAR model to examine the relationship between Household Debt and GDP."
+      }, 
+      {
+        title: "Weather Forecasting with Ensemble Deep Learning",
+        src: "/project2.jpg",
+        description: "Analysis of Random Forest, LSTM, and BiLSTM models for weather forecasting."
+      },
+      {
+        title: "ClefAI Music Generator",
+        src: "/Project-photos/ClefAI.png",
+        description: "A program that generates musical melodies using Markov chains based on a MIDI file input."
+      }
+    ]
+  },
+  {
+    title: "Software Projects",
+    pattern: 'v-shape' as const,
+    cards: [
+      {
+        title: "Voyage Job Search",
+        src: "/Project-photos/Voyage.png",
+        description: "Full-stack job search website"
+      },
+      {
+        title: "Math Image to LaTeX Generator",
+        src: "/Project-photos/MathLaTeXAI.png",
+        description: "Using Google Gemini, we created a website that converts images of math equations into LaTeX code "
+      }
+    ]
+  },
+  {
+    title: "Games",
+    pattern: 'v-shape' as const,
+    cards: [
+      {
+        title: "Terrestrial Intelligence",
+        src: "/Project-photos/Terrestrial Intelligence.png",
+        description: "Multiplayer3D FPS game developed with Unreal Engine, Blender, and open source assets. Includes mechanics such as wall running, double jump, crouch, and more."
+      },
+      {
+        title: "Tank Battle",
+        src: "/Project-photos/Tank Game.png",
+        description: "Multiplayer tankgame with random terrain generation andterrain deformation."
+      },
+      {
+        title: "Connect 4 Game with AI opponent",
+        src: "/Project-photos/Connect4.png",
+        description: "Connect 4 game with AI opponent that utilizes alpha-beta pruning to increase AI accuracy."
+      }
+    ]
+  }
+];
 
 const PortfolioPage = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -238,16 +302,17 @@ const PortfolioPage = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen bg-[#0a192f]">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#0a192f] via-[#0d1f3b] to-[#112240]">
       <Navbar />
-      <div ref={mountRef} className="w-full h-full" />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300">
-          Bram
-        </h1>
-        <p className="text-xl sm:text-2xl md:text-3xl text-cyan-200/90">
-          Full Stack Developer
-        </p>
+      <div ref={mountRef} className="fixed top-0 left-0 w-full h-screen opacity-40" />
+      
+      <div className="relative z-10">
+        <TracingBeam>
+          <main className="flex flex-col w-full px-0 py-8 md:px-0 lg:px-0 max-w-[1460px] mx-auto">
+            <ProjectsSection projectSections={projectSections} />
+            <AboutSection />
+          </main>
+        </TracingBeam>
       </div>
     </div>
   );

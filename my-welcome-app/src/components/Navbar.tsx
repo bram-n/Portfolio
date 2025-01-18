@@ -7,9 +7,10 @@ const Navbar = () => {
   const currentPath = router.pathname;
 
   const navItems = [
-    { path: '/', label: 'Home', icon: '⌂' },
-    { path: '/portfolio?direct=true', label: 'Projects', icon: '⚡' },
-    { path: '/contact', label: 'Contact', icon: '✉' }
+    { path: '/', label: 'Home' },
+    { path: '/portfolio?direct=true', label: 'Projects' },
+    { path: '/contact', label: 'Contact' },
+    { path: '/portfolio#about', label: 'About' }
   ];
 
   return (
@@ -24,8 +25,7 @@ const Navbar = () => {
               className={`group relative flex flex-col items-center transition-all duration-300
                 ${currentPath === item.path.split('?')[0] ? 'text-cyan-400' : 'text-gray-400'}`}
             >
-              <span className="text-sm mb-1">{item.icon}</span>
-              <span className="tracking-widest text-xs font-light uppercase relative pl-3">
+              <span className="tracking-widest text-sm font-medium uppercase relative pl-3 font-['Montserrat']">
                 <div className="absolute -left-2 top-0 w-0.5 h-0 bg-gradient-to-b from-cyan-400 via-cyan-300 to-teal-300 group-hover:h-full transition-all duration-300 opacity-0 group-hover:opacity-100 blur-[2px]"></div>
                 <div className="absolute -left-2 top-0 w-0.5 h-0 bg-gradient-to-b from-cyan-400 via-cyan-300 to-teal-300 group-hover:h-full transition-all duration-300 opacity-0 group-hover:opacity-70"></div>
                 {item.label}
