@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react';
 import { PARTICLE_CONFIG, CAMERA_CONFIG } from '../constants/particle.constants';
 import { vertexShader, fragmentShader } from '../shaders/particle.shaders';
 import type { ParticlePositions, MousePosition, Rotation } from '../types/three.types';
-import Navbar from '../components/Navbar';
 import { TracingBeam } from '../components/TracingBeam';
 import { ProjectsSection } from '../components/ProjectsSection';
 import { AboutSection } from '../components/AboutSection';
@@ -303,7 +302,6 @@ const PortfolioPage = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#0a192f] via-[#0d1f3b] to-[#112240]">
-      <Navbar />
       <div ref={mountRef} className="fixed top-0 left-0 w-full h-screen opacity-40" />
       
       <div className="relative z-10">
