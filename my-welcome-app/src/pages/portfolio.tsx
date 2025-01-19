@@ -15,7 +15,7 @@ const projectSections = [
     cards: [
       {
         title: "Deep Vector Autoregression",
-        src: "/project1.jpg",
+        src: "/Project-photos/IRF.png",
         description: "My Honors Economics Research project which utilizes a Deep VAR model to examine the relationship between Household Debt and GDP."
       }, 
       {

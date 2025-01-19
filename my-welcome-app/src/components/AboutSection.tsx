@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export const AboutSection = () => {
   return (
-    <section className="w-full py-24 md:py-32 bg-gradient-to-b from-[#112240]/50 to-[#0a192f]/50 backdrop-blur-sm">
+    <section id="about" className="w-full py-24 md:py-32 bg-gradient-to-b from-[#112240]/50 to-[#0a192f]/50 backdrop-blur-sm">
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
