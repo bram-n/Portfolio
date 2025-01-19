@@ -1,13 +1,16 @@
 import '@/styles/globals.css';
+import { Inter } from 'next/font/google';
 import type { AppProps } from 'next/app';
 
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className="flex">
-      <div className="flex-1 ml-16">
-        <Component {...pageProps} />
-      </div>
-    </div>
+    <main className={inter.className}>
+      <Component {...pageProps} />
+    </main>
   );
 } 
