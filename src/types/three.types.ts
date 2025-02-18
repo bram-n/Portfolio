@@ -1,5 +1,3 @@
-import { Float32Array } from 'three';
-
 export interface ParticlePositions {
   array: Float32Array;
   original: Float32Array;
