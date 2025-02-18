@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { PARTICLE_CONFIG, CAMERA_CONFIG } from '../constants/particle.constants';
 import { vertexShader, fragmentShader } from '../shaders/particle.shaders';
 import type { ParticlePositions, MousePosition, Rotation } from '../types/three.types';
-import Navbar from '../components/Navbar';
+
 import emailjs from '@emailjs/browser';
 
 // Replace these with your actual EmailJS credentials
@@ -307,7 +307,6 @@ const ContactPage = () => {
 
   return (
     <div className="relative min-h-screen bg-[#0a192f]">
-      <Navbar />
       <div ref={mountRef} className="fixed top-0 left-0 w-full h-screen" />
       
       {showToast && (

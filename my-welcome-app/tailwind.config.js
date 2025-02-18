@@ -29,6 +29,9 @@ module.exports = {
       animation: {
         'slide-in': 'slide-in 0.3s ease-out forwards',
       },
+      screens: {
+        '2xl': '1400px', // Custom breakpoint for 3 columns
+      },
     },
   },
   plugins: [addVariablesForColors],

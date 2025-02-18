@@ -14,18 +14,21 @@ const projectSections = [
     cards: [
       {
         title: "Deep Vector Autoregression",
-        src: "/project1.jpg",
-        description: "My Honors Economics Research project which utilizes a Deep VAR model to examine the relationship between Household Debt and GDP."
+        src: "/Project-photos/IRF.png",
+        description: "My Honors Economics Research project which utilizes a Deep VAR model to examine the relationship between Household Debt and GDP.",
+        githubLink: "https://github.com/bram-n/Honors-DeepVAR-Household-Debt-Analysis"
       }, 
       {
         title: "Weather Forecasting with Ensemble Deep Learning",
-        src: "/project2.jpg",
-        description: "Analysis of Random Forest, LSTM, and BiLSTM models for weather forecasting."
+        src: "/Project-photos/Weather.png",
+        description: "Analysis of Random Forest, LSTM, and BiLSTM models for weather forecasting.",
+        githubLink: "https://github.com/comp484-IntroToAI/semester-project-bram-long"
       },
       {
         title: "ClefAI Music Generator",
         src: "/Project-photos/ClefAI.png",
-        description: "A program that generates musical melodies using Markov chains based on a MIDI file input."
+        description: "A program that generates musical melodies using Markov chains based on a MIDI file input.",
+        githubLink: "https://github.com/bram-n/music-markov-generation/tree/master"
       }
     ]
   },
@@ -36,12 +39,14 @@ const projectSections = [
       {
         title: "Voyage Job Search",
         src: "/Project-photos/Voyage.png",
-        description: "Full-stack job search website"
+        description: "Full-stack job search website",
+        githubLink: "https://github.com/bram-n/Voyage"
       },
       {
         title: "Math Image to LaTeX Generator",
         src: "/Project-photos/MathLaTeXAI.png",
-        description: "Using Google Gemini, we created a website that converts images of math equations into LaTeX code "
+        description: "Using Google Gemini, we created a website that converts images of math equations into LaTeX code",
+        githubLink: "https://github.com/bram-n/Math-To-LaTeX"
       }
     ]
   },
@@ -52,17 +57,20 @@ const projectSections = [
       {
         title: "Terrestrial Intelligence",
         src: "/Project-photos/Terrestrial Intelligence.png",
-        description: "Multiplayer3D FPS game developed with Unreal Engine, Blender, and open source assets. Includes mechanics such as wall running, double jump, crouch, and more."
+        description: "Multiplayer3D FPS game developed with Unreal Engine, Blender, and open source assets. Includes mechanics such as wall running, double jump, crouch, and more.",
+        githubLink: "https://github.com/bram-n/Terrestrial-Intelligence-FPS"
       },
       {
         title: "Tank Battle",
         src: "/Project-photos/Tank Game.png",
-        description: "Multiplayer tankgame with random terrain generation andterrain deformation."
+        description: "Multiplayer tankgame with random terrain generation andterrain deformation.",
+        githubLink: "https://github.com/Mac-COMP-127-Spring-2022-classroom/course-project-tank-game"
       },
       {
         title: "Connect 4 Game with AI opponent",
         src: "/Project-photos/Connect4.png",
-        description: "Connect 4 game with AI opponent that utilizes alpha-beta pruning to increase AI accuracy."
+        description: "Connect 4 game with AI opponent that utilizes alpha-beta pruning to increase AI accuracy.",
+        githubLink: "https://github.com/mac-comp128-s23/128-project-bram-james-justin"
       }
     ]
   }
@@ -303,13 +311,10 @@ const PortfolioPage = () => {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-[#0a192f] via-[#0d1f3b] to-[#112240]">
       <div ref={mountRef} className="fixed top-0 left-0 w-full h-screen opacity-40" />
-      
       <div className="relative z-10">
-        <TracingBeam>
-          <main className="flex flex-col w-full px-0 py-8 md:px-0 lg:px-0 max-w-[1460px] mx-auto">
+        <TracingBeam className="px-16">
             <ProjectsSection projectSections={projectSections} />
             <AboutSection />
-          </main>
         </TracingBeam>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="w-full py-24 md:py-32 bg-gradient-to-b from-[#112240]/50 to-[#0a192f]/50 backdrop-blur-sm">
+    <section id="about" className="w-full py-16 md:py-24 bg-gradient-to-b from-[#112240]/50 to-[#0a192f]/50 backdrop-blur-sm">
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -21,7 +21,6 @@ export const AboutSection = () => {
                 viewport={{ once: true }}
                 className="text-sm font-mono text-cyan-400 block"
               >
-                About Me
               </motion.span>
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
@@ -30,7 +29,7 @@ export const AboutSection = () => {
                 viewport={{ once: true }}
                 className="text-5xl sm:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300 drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]"
               >
-                Building digital experiences that matter
+                About Me
               </motion.h1>
             </div>
             <motion.div 
@@ -41,12 +40,20 @@ export const AboutSection = () => {
               className="space-y-8 text-xl leading-relaxed text-gray-300/90"
             >
               <p className="font-light">
-                I'm Bram, currently I'm a senior Economics and Computer Science Major at Macalester College.
+                Hello, I'm Bram! 👋 
               </p>
               <p className="font-light">
+              I'm a senior Economics and Computer Science Major at Macalester College.
               </p>
               <p className="font-light">
-                In my spare time I like to 
+              I'm currently a Economics TA at Macalester College (2022-Present). Previously, I was an intern at BrightAI (2023-2025).
+              </p>
+              <p className="font-light">
+                I enjoy coding in Python, Java, SQL, and React.
+                I am also familiar with C and Stata and am currently learning R and Matlab.
+              </p>
+              <p className="font-light">
+                In my spare time I like to read, golf, hike, and play the violin.
               </p>
               <div className="pt-10">
                 <motion.a 
@@ -68,14 +75,17 @@ export const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="lg:col-span-5 lg:sticky lg:top-20"
+            className="md:col-span-5 pt-20 md:pt-20"
           >
             <div className="relative group">
               <div className="absolute inset-0 bg-cyan-400/20 rounded-lg transform translate-x-4 translate-y-4 -z-10 transition-transform duration-300 group-hover:translate-x-5 group-hover:translate-y-5" />
               <div className="relative aspect-[4/5] w-full bg-[#112240]/80 rounded-lg overflow-hidden border-2 border-cyan-400/20 transition-colors duration-300 group-hover:border-cyan-400/40">
-                {/* Placeholder for your image */}
+              <img 
+                  src="/IMG_8239.png"
+                  alt="Picture"
+                  className="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 flex items-center justify-center text-gray-500/80">
-                  Add your image here
                 </div>
               </div>
             </div>

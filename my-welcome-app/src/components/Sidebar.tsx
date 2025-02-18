@@ -117,9 +117,9 @@ const Sidebar = () => {
                 {item.label}
               </div>
               {isActive(item.path) && (
-                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 
-                              bg-gradient-to-b from-cyan-400 via-cyan-300 to-teal-300 
-                              rounded-r-full blur-[2px]" />
+                <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-8 h-0.5 
+                              bg-gradient-to-r from-cyan-400 via-cyan-300 to-teal-300 
+                              rounded-full blur-[1px]" />
               )}
             </Link>
           ))}

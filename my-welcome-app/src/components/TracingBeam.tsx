@@ -26,13 +26,24 @@ export const TracingBeam = ({
   const [svgHeight, setSvgHeight] = useState(0);
 
   useEffect(() => {
-    if (contentRef.current) {
-      setSvgHeight(contentRef.current.offsetHeight);
-    }
-  }, []);
+    const updateHeight = () => {
+      if (contentRef.current) {
+        setSvgHeight(contentRef.current.offsetHeight);
+      }
+    };
+
+    // Initial height calculation
+    updateHeight();
+
+    // Add resize listener
+    window.addEventListener('resize', updateHeight);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []); // Empty dependency array since we want this to run once on mount
 
   const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 0.8], [50, svgHeight]),
+    useTransform(scrollYProgress, [0, 0.5], [50, svgHeight]),
     {
       stiffness: 500,
       damping: 90,
