@@ -388,6 +388,26 @@ const LandingPage: React.FC = () => {
     };
   }, [isHovering, isDispersing, router]);
 
+  // Load project images in the background when the user clicks
+  useEffect(() => {
+    if (isDispersing) {
+      const projectImages = [
+        "/Project-photos/IRF.png",
+        "/Project-photos/Weather.png",
+        "/Project-photos/ClefAI.png",
+        "/Project-photos/Voyage.png",
+        "/Project-photos/MathLaTeXAI.png",
+        "/Project-photos/Terrestrial Intelligence.png",
+        "/Project-photos/Tank Game.png",
+        "/Project-photos/Connect4.png"
+      ];
+      projectImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+  }, [isDispersing]);
+
   return (
     <div className="relative w-full h-screen">
       <WelcomeText isDispersing={isDispersing} />
